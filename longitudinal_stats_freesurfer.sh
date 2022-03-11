@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# top variables
 template_base=`jq -r '.freesurfer_template_base' config.json`
 freesurfers=($(jq -r '.freesurfers' config.json  | tr -d '[]," '))
 subjectID=`jq -r '._inputs[0].meta.subject' config.json`
