@@ -80,6 +80,5 @@ do
 done
 
 ### to do
-# 1. write script to convert surface data into cortexmap datatype
-# 2. create repo on github and app on bl
-# 3. beta testing multiple subjects
+# 1. write code to convert surface data into cortexmap datatype
+# 2. beta testing multiple subjects
