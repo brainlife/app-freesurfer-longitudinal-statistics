@@ -37,20 +37,16 @@ do
   echo "${subjectID}_${i} ${subjectID} ${year}" >> ./qdec/long.qdec.table.dat
 done
 
-# cmd="--meas ${stats_compute[0]}"
-# for (( i=1; i<${#stats_compute[*]}; i++))
-# do
-#   cmd=$cmd" --meas ${stats_compute[$i]}"
-# done
-#
-# # generate surface files of measures. useful to create cortexmap data from
-# for i in ${stats_compute[*]}
-# do
-#   for h in ${hemi}
-#   do
-#     long_mris_slopes --qdec ./qdec/long.qdec.table.dat ${i} --hemi ${h} --do-avg --do-rate --do-pc1 --do-spc --do-stack --do-label --time years --qcache ${fsaverage} --sd ./
-#   done
-# done
+# generate surface files of measures. useful to create cortexmap data from
+for i in ${stats_compute[*]}
+do
+  for h in ${hemi}
+  do
+    long_mris_slopes --qdec ./qdec/long.qdec.table.dat ${i} --hemi ${h} --do-avg --do-rate --do-pc1 --do-spc --do-label --time years --qcache ${fsaverage} --sd ./
+  done
+done
+
+#### NEED TO FIGURE OUT CORTEXMAP STUFF
 
 output_measures="avg rate pc1fit pc1 spc"
 # generate stats files
