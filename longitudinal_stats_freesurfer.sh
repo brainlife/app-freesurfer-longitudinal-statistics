@@ -49,18 +49,22 @@ done
 
 #### NEED TO FIGURE OUT CORTEXMAP STUFF
 
-output_measures="avg rate pc1fit pc1 spc"
-# generate stats files
 
+
+# generate stats files
+output_measures="avg rate pc1fit pc1 spc"
+
+# loop through aparcs, hemispheres, and stats to compute, generate stats table, and then output the data into a txt file that's easier to work with in python3
 for a in ${aparcs}
 do
   for h in ${hemi}
   do
     for i in ${stats_compute[*]}
     do
+      # generate stats table
       [ ! -f ./${subjectID}/stats/long.${h}.${a}.stats.${i}-spc.dat ] && long_stats_slopes --qdec ./qdec/long.qdec.table.dat --stats ${h}.${a}.stats --meas $i --sd ./ --do-avg --do-rate --do-pc1fit --do-pc1 --do-spc --time years --out-rate long.${h}.${a}.stats.${i}-rate.dat --out-avg long.${h}.${a}.stats.${i}-avg.dat --out-pc1fit long.${h}.${a}.stats.${i}-pc1fit.dat --out-pc1 long.${h}.${a}.stats.${i}-pc1.dat --out-spc long.${h}.${a}.stats.${i}-spc.dat
 
-      # grab data
+      # grab data and output intot text file
       for j in ${output_measures}
       do
         if [ ! -f ./${h}.${a}.stats.${i}-${j}.txt ]; then
