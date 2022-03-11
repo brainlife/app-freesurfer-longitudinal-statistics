@@ -59,10 +59,10 @@ def main():
     subjectID = config['_inputs'][0]['meta']['subject']
 
     # make output directory for stats
-    outdir = './parc-stats/parc-stats'
+    outdir = './parc_stats/parc-stats'
 
     if not os.path.isdir('./parc-stats'):
-        os.mkdir('./parc-stats')
+        os.mkdir('./parc_stats')
     if not os.path.isdir(outdir):
         os.mkdir(outdir)
 
