@@ -1,0 +1,21 @@
+{
+    "freesurfers": [
+        "./freesurfers/output",
+        "./freesurfers/output_2"
+    ],
+    "timeframe":	"0 1.5",
+    "freesurfer_template_base":	"./freesurfers/output_template/template",
+    "fsaverage":  "fsaverage",
+    "stats":  "area volume thickness thickness thicknessstd meancurv gauscurv foldind curvind",
+    "_inputs": [
+        {
+            "id": "t1",
+            "task_id": "62212f8eff10f482daba7b57",
+            "subdir": "5e800dcbfa1b6328ce0df89c",
+            "meta": {
+                "subject": "subj001",
+                "session": "1"
+            }
+	}
+    ]
+}
