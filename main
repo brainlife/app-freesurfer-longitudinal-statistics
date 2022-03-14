@@ -9,23 +9,26 @@
 set -x
 set -e
 
-[ ! -d ./parc_stats ] && mkdir -p ./parc_stats/ ./parc_stats/parc-stats
-[ ! -d ./cortexmap ] && mkdir -p ./cortexmap && mkdir -p ./cortexmap/cortexmap
+subjectID=`jq -r '._inputs[0].meta.subject' config.json`
+fsaverage=`jq -r '.fsaverage' config.json`
+
+# copy over fsaverage data
+[ ! -d ./${fsaverage} ] && cp -R ${SUBJECTS_DIR}/${fsaverage} ./${fsaverage} && chmod -R +w ./${fsaverage}
 
 # copy license and export path for freesurfer
-[ -z "$FREESURFER_LICENSE" ] && echo "Please set FREESURFER_LICENSE in .bashrc" && exit 1;
+[ -z "$FREESURFER_LICENSE" ] && echo "Please set FREESURFER_LICENSE in .bashrc" #&& #exit 1;
 echo $FREESURFER_LICENSE > license.txt
 
 # convert surfaces and generate appropriate summary statistic text files
-time singularity exec -e -B `pwd`/license.txt:/usr/local/freesurfer/license.txt docker://brainlife/freesurfer:7.1.1-1 ./longitudinal_stats_freesurfer.sh
+time singularity exec -e -B `pwd`/license.txt:/usr/local/freesurfer/license.txt docker://brainlife/freesurfer:7.1.1 ./compute-long-stats.sh
+
+time singularity exec -e -B `pwd`/license.txt:/usr/local/freesurfer/license.txt docker://brainlife/connectome_workbench:1.5.0 ./convert-to-cortexmap.sh
 
 # generate csv's for each statistic that can be useful in MLC analyses
-time singularity exec -e docker://brainlife/freesurfer-stats:1.2 ./generateParcellationCSVs.py
+time singularity exec -e docker://brainlife/freesurfer-stats:1.2 ./createParcellationCSVs.py
 
 if [ -f ./parc-stats/parc-stats/longitudinal_stats_aparc.DKTatlas.csv ]; then
-	# mkdir raw
-	# mv aparc-rois/ *.txt ./tmp/*.txt *.gii ./raw/
-	rm -rf ./tmp/*
+	rm -rf ./tmpstats fsaverage* *${subjectID}* qdec
 	echo "complete"
 	exit 0
 else

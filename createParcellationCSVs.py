@@ -25,7 +25,7 @@ def loadStatsFile(filepath,subjectID,parcellation_name):
     # loop through left and right hemispheres
     for h in hemispheres:
 
-        tmp_filepath = h+'.'+filepath
+        tmp_filepath = './tmpstats/'+h+'.'+filepath
 
         # load data
         with open(tmp_filepath,'r') as file_f:
@@ -61,7 +61,7 @@ def main():
     # make output directory for stats
     outdir = './parc_stats/parc-stats'
 
-    if not os.path.isdir('./parc-stats'):
+    if not os.path.isdir('./parc_stats'):
         os.mkdir('./parc_stats')
     if not os.path.isdir(outdir):
         os.mkdir(outdir)
@@ -70,7 +70,7 @@ def main():
     parcellations = ['aparc','aparc.a2009s','aparc.DKTatlas']
     for p in parcellations:
         print('compiling data for %s parcellation' %(p))
-        filepaths = [ f.split('./lh.')[1] for f in sorted(glob.glob("./lh."+p+".stats.*.txt")) ]
+        filepaths = [ f.split('./tmpstats/lh.')[1] for f in sorted(glob.glob("./tmpstats/lh."+p+".stats.*.txt")) ]
 
         dataframe = pd.DataFrame()
         for i in range(len(filepaths)):

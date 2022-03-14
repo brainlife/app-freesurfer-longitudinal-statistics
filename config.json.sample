@@ -5,8 +5,8 @@
     ],
     "timeframe":	"0 1.5",
     "freesurfer_template_base":	"./freesurfers/output_template/template",
-    "fsaverage":  "fsaverage",
-    "stats":  "area volume thickness thickness thicknessstd meancurv gauscurv foldind curvind",
+    "fsaverage":  "fsaverage6",
+    "validator_csv":  "longitudinal_stats_aparc",
     "_inputs": [
         {
             "id": "t1",
