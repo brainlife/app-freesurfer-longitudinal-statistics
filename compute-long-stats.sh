@@ -97,8 +97,3 @@ if [ ! -f ./tmpstats/${h}.${a}.stats.${i}-${j}.txt ]; then
   echo "something went wrong. check logs and derivatives"
   # exit 1
 fi
-
-
-### to do
-# 1. write code to compute stats for subcortical segmentation (aseg.mgz)
-# 2. beta testing multiple subjects
