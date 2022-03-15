@@ -53,14 +53,14 @@ do
 
     echo "creating midthickness"
     # create midthickness surfaces
-    if [ ! -f ./${out_stem_dir}/${h}.midthickness.${space}.surf.gii ]; then
+    if [ ! -f ./${out_stem_dir}/${h}.midthickness.surf.gii ]; then
       wb_command -surface-average \
-        ./${out_stem_dir}/${h}.midthickness.${space}.surf.gii \
+        ./${out_stem_dir}/${h}.midthickness.surf.gii \
         -surf ./${out_stem_dir}/${h}.white.surf.gii \
         -surf ./${out_stem_dir}/${h}.pial.surf.gii
 
       wb_command -set-structure \
-        ./${out_stem_dir}/${h}.midthickness.${space}.surf.gii \
+        ./${out_stem_dir}/${h}.midthickness.surf.gii \
         ${STRUCTURE} \
         -surface-type ANATOMICAL \
         -surface-secondary-type MIDTHICKNESS
@@ -99,7 +99,7 @@ do
 
             # set structure
             wb_command -set-structure ./cortexmap/cortexmap/func/${h}.long.${i}.${j}.fwhm${k}${out_stem} ${STRUCTURE}
-            
+
             # set map name
             wb_command -set-map-names ./cortexmap/cortexmap/func/${h}.long.${i}.${j}.fwhm${k}${out_stem} -map 1 "${h}".long."${i}"."${j}".fwhm."${space}"
 
