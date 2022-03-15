@@ -103,15 +103,15 @@ do
             # set map name
             wb_command -set-map-names ./cortexmap/cortexmap/func/${h}.long.${i}.${j}.fwhm${k}${out_stem} -map 1 "${h}".long."${i}"."${j}".fwhm."${space}"
 
-            # set palette
-            wb_command -metric-palette ./cortexmap/cortexmap/func/${h}.long.${i}.${j}.fwhm${k}${out_stem} \
-              MODE_AUTO_SCALE_PERCENTAGE \
-              -pos-percent 4 96 \
-              -interpolate true \
-              -palette-name videen_style \
-              -disp-pos true \
-              -disp-neg true \
-              -disp-zero true
+            # # set palette
+            # wb_command -metric-palette ./cortexmap/cortexmap/func/${h}.long.${i}.${j}.fwhm${k}${out_stem} \
+            #   MODE_AUTO_SCALE_PERCENTAGE \
+            #   -pos-percent 4 96 \
+            #   -interpolate true \
+            #   -palette-name videen_style \
+            #   -disp-pos true \
+            #   -disp-neg true \
+            #   -disp-zero true
             fi
         done
       done
