@@ -10,11 +10,11 @@
   <a href="https://github.com/brainlife/app-freesurfer-longitudinal-statistics/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg" alt="MIT license"></a>
 </p>
 
-> 📍 **This branch, `v1.0-free_7_1_1-wb_1_5_0`, is the brainlife.io App Freesurfer Longitudinal Statistics** ([doi:10.25663/brainlife.app.609](https://doi.org/10.25663/brainlife.app.609)).
+> **This branch, `v1.0-free_7_1_1-wb_1_5_0`, is the brainlife.io App Freesurfer Longitudinal Statistics** ([doi:10.25663/brainlife.app.609](https://doi.org/10.25663/brainlife.app.609)).
 
 This App computes statistics with the [FreeSurfer longitudinal pipeline](https://surfer.nmr.mgh.harvard.edu/fswiki/LongitudinalProcessing) to measure how cortical area, volume, thickness and curvature change between timepoints within each region of the three FreeSurfer parcellations. It also converts the surface measures to a cortexmap dataset for visualisation and for analyses across the surfaces of many participants.
 
-## 🧠 At a glance
+## At a glance
 
 <!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
 
@@ -24,21 +24,21 @@ Builds a qdec table from the longitudinal timepoints and the timeframe, runs lon
 
 | | |
 |---|---|
-| 📥 **Inputs** | `neuro/freesurfer` · `neuro/freesurfer/longitudinal-template` |
-| 📤 **Outputs** | `neuro/parc-stats` · `neuro/cortexmap` |
-| 🐳 **Container** | `brainlife/freesurfer:7.1.1` |
-| ⚙️ **Resources** | 1 CPUs |
-| 🔑 **Requires** | `FREESURFER_LICENSE` |
-| 🔗 **Run it** | [doi.org/10.25663/brainlife.app.609](https://doi.org/10.25663/brainlife.app.609) |
+| **Inputs** | `neuro/freesurfer` · `neuro/freesurfer/longitudinal-template` |
+| **Outputs** | `neuro/parc-stats` · `neuro/cortexmap` |
+| **Container** | `brainlife/freesurfer:7.1.1` |
+| **Resources** | 1 CPUs |
+| **Requires** | `FREESURFER_LICENSE` |
+| **Run it** | [doi.org/10.25663/brainlife.app.609](https://doi.org/10.25663/brainlife.app.609) |
 
-#### 📥 Inputs
+#### Inputs
 
 | Input | Datatype | Required | Description |
 |---|---|---|---|
 | `freesurfers` | `neuro/freesurfer` (longitudinal) | yes | FreeSurfer longitudinal (long) outputs of each timepoint of the subject, in time order. |
 | `freesurfer_template_base` | `neuro/freesurfer/longitudinal-template` | yes | FreeSurfer longitudinal base template of the subject, built from the same timepoints. |
 
-#### 📤 Outputs
+#### Outputs
 
 | Output | Datatype | Description |
 |---|---|---|
@@ -46,7 +46,7 @@ Builds a qdec table from the longitudinal timepoints and the timeframe, runs lon
 | `cortexmap` | `neuro/cortexmap` | this will contain surface versions of computed stats for visualizations and group analyses on the surface |
 
 <details>
-<summary><b>⚙️ Parameters</b> (3)</summary>
+<summary><b>Parameters</b> (3)</summary>
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
@@ -58,9 +58,9 @@ Builds a qdec table from the longitudinal timepoints and the timeframe, runs lon
 
 <!-- brainlife-app:end -->
 
-## 🚀 Running the App
+## Running the App
 
-### ☁️ On brainlife.io
+### On brainlife.io
 
 This App is the last step of a longitudinal workflow. First run the FreeSurfer 7.1.1 longitudinal Apps on the recon-all outputs of each participant:
 
@@ -75,7 +75,7 @@ Then open this App at [doi.org/10.25663/brainlife.app.609](https://doi.org/10.25
 
 The App archives a `neuro/parc-stats` dataset and a `neuro/cortexmap` dataset to your project.
 
-### 💻 Locally
+### Locally
 
 You need [Singularity/Apptainer](https://apptainer.org/), [`jq`](https://jqlang.github.io/jq/), a [FreeSurfer license](https://surfer.nmr.mgh.harvard.edu/registration.html), and `SUBJECTS_DIR` pointing to a FreeSurfer subjects directory that contains the chosen fsaverage subject (it is copied into the working directory). `main` uses the `brainlife/freesurfer:7.1.1`, `brainlife/connectome_workbench:1.5.0` and `brainlife/freesurfer-stats:1.2` containers.
 
@@ -105,13 +105,13 @@ You need [Singularity/Apptainer](https://apptainer.org/), [`jq`](https://jqlang.
    ./main
    ```
 
-### 🔬 How it works
+### How it works
 
 1. `compute-long-stats.sh` builds a qdec table from the timepoints and `timeframe`, runs `long_mris_slopes` for area, volume, thickness and curvature (smoothed surface maps on fsaverage) and `long_stats_slopes` for the regional statistics of each parcellation. Each measure is reported as the temporal average (`avg`), rate of change (`rate`), percent change (`pc1`, `pc1fit`) and symmetrised percent change (`spc`).
 2. `convert-to-cortexmap.sh` converts surfaces, labels and measure maps (FWHM 0 to 25 mm) to GIFTI with Connectome Workbench.
 3. `createParcellationCSVs.py` writes one table per parcellation.
 
-## 📦 Outputs
+## Outputs
 
 ```text
 parc_stats/parc-stats/
@@ -124,12 +124,12 @@ cortexmap/cortexmap/
 └── func/        <hemi>.long.<measure>.<avg|rate|pc1fit|pc1|spc>.fwhm<0–25>.<native|mni>.func.gii
 ```
 
-## 🩺 Troubleshooting
+## Troubleshooting
 
 - **`stats computations failed somewhere. please check logs and derivatives`**: the DKT table was not produced. Make sure the timepoints and the base template come from the FreeSurfer longitudinal Apps for the same subject, and that `timeframe` has one value per timepoint.
 - **`Please set FREESURFER_LICENSE in .bashrc`**: export your FreeSurfer license text in `FREESURFER_LICENSE` before running `main`.
 
-## 📚 Citing
+## Citing
 
 > [!TIP]
 > If you use this App in your work, please cite the App, the software it builds on and brainlife.io (below). GitHub's **Cite this repository** button gives the App citation in APA and BibTeX.
@@ -143,13 +143,13 @@ cortexmap/cortexmap/
 - Hayashi S, Caron BA, Heinsfeld AS, et al. brainlife.io: a decentralized and open-source cloud platform to support neuroscience research. *Nature Methods* 21:809–813 (2024). [doi:10.1038/s41592-024-02237-2](https://doi.org/10.1038/s41592-024-02237-2)
 - Avesani P, McPherson B, Hayashi S, et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. *Scientific Data* 6:69 (2019). [doi:10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
 
-## 👥 Authors
+## Authors
 
 - Brad Caron
 
 **Contributors:** Soichi Hayashi, Franco Pestilli
 
-## 💰 Funding
+## Funding
 
 [![Wellcome-226486/Z/22/Z](https://img.shields.io/badge/Wellcome-226486%2FZ%2F22%2FZ-purple.svg)](https://wellcome.org/)
 [![NIH-NINDS-U24NS140384](https://img.shields.io/badge/NIH_NINDS-U24NS140384-green.svg)](https://reporter.nih.gov/project-details/11261037)
@@ -168,6 +168,6 @@ cortexmap/cortexmap/
 
 <sub>brainlife.io is publicly funded, and acknowledging that support helps keep it running. This App was developed with support from Wellcome, the U.S. National Institutes of Health (including the BRAIN Initiative BRAIN CONNECTS program: The Axonal Projectome EXchange, U24NS140384, and the Center for Mesoscale Connectomics, UM1NS132207) and the U.S. National Science Foundation.</sub>
 
-## ⚖️ License
+## License
 
 MIT. FreeSurfer is distributed under its own [license](https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferSoftwareLicense).
